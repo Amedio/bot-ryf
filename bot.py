@@ -13,7 +13,7 @@ async def on_ready():
     print('------')
 
 @bot.command()
-async def roll(ctx, args):
+async def roll(ctx):
 
     rollresult = dices()
 
