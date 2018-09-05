@@ -12,6 +12,10 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
+@bot.command
+async def help(ctx):
+    await ctx.send("Si quieres poder hacer una tirada escribe *$roll nivel_habilidad*")
+
 @bot.command()
 async def roll(ctx, *args):
 
