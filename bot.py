@@ -20,19 +20,21 @@ async def roll(ctx, *args):
     mediumresult = sorted(rollresult)[1]
 
     if len(args) > 0:
-        skill = args[0]
+        skill = int(args[0])
         total = mediumresult + skill
 
         rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
         rich.add_field(name="tirada", value=rollresult, inline=True)
         rich.add_field(name="dado medio", value=mediumresult, inline=True)
         rich.add_field(name="resultado", value="{0} + {1} = {2}".format(mediumresult, skill, total), inline=False)
+
+        await ctx.send(embed=rich)
     else:
         rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, mediumresult))
         rich.add_field(name="tirada", value=rollresult, inline=True)
         rich.add_field(name="dado medio", value=mediumresult, inline=True)
 
-    await ctx.send(embed=rich)
+        await ctx.send(embed=rich)
 
 def dices():
     min = 1
