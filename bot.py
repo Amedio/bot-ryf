@@ -22,7 +22,7 @@ async def roll(ctx):
     skill = 7
     total = mediumresult + skill
 
-    rich=Embed(title="Amedio ha tirado ""Advertir/Notar"" con un resultado de 10")
+    rich=Embed(title="{0.author} ha tirado ""Advertir/Notar"" con un resultado de {1}".format(ctx, total))
     rich.add_field(name="tirada", value=rollresult, inline=True)
     rich.add_field(name="dado medio", value=mediumresult, inline=True)
     rich.add_field(name="resultado", value="{0} + {1} = {2}".format(mediumresult, skill, total), inline=False)
