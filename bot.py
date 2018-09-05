@@ -13,7 +13,7 @@ async def on_ready():
     print('------')
 
 @bot.command()
-async def roll(ctx):
+async def roll(ctx, args):
 
     rollresult = dices()
 
@@ -22,7 +22,7 @@ async def roll(ctx):
     skill = 7
     total = mediumresult + skill
 
-    rich=Embed(title="{0.author.mention} ha tirado ""Advertir/Notar"" con un resultado de {1}".format(ctx, total))
+    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
     rich.add_field(name="tirada", value=rollresult, inline=True)
     rich.add_field(name="dado medio", value=mediumresult, inline=True)
     rich.add_field(name="resultado", value="{0} + {1} = {2}".format(mediumresult, skill, total), inline=False)
