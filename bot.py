@@ -5,7 +5,6 @@ import ryf
 import asyncio
 from discord.ext import commands
 from discord import Embed
-from checkers import to_much_dices
 
 bot = commands.Bot(command_prefix='$')
 
@@ -74,7 +73,7 @@ async def roll(ctx, *args):
                 rich.add_field(name="resultado", value="FALLO", inline=True)
             if total - difficulty >= 10:
                 rich.add_field(name="crítico", value="CRÍTICO", inline=True)
-                
+
     await ctx.send(embed=rich)
 
 @bot.command()
