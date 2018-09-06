@@ -4,6 +4,7 @@ import utils
 import ryf
 from discord.ext import commands
 from discord import Embed
+from checkers import to_much_dices
 
 bot = commands.Bot(command_prefix='$')
 
@@ -97,6 +98,7 @@ async def roll(ctx, *args):
         await ctx.send(embed=rich)
 
 @bot.command()
+@to_much_dices()
 async def damage(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
@@ -111,6 +113,10 @@ async def damage(ctx, *args):
     rich.add_field(name="total", value=totalroll, inline=True)
 
     await ctx.send(embed=rich)
+
+@damage.error
+async def damage_error(ctx, error):
+    await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
 
 @bot.command()
 async def effect(ctx, *args):
