@@ -12,7 +12,7 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-@bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad dificultad]')
+@bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad [dificultad]]')
 async def roll(ctx, *args):
 
     allrolls = []
