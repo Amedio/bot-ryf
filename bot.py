@@ -104,7 +104,7 @@ async def damage(ctx, *args):
         totalroll = totalroll + rollresult[i]
     
     rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
-    'rich.add_field(name="tirada", value=rollresult, inline=True)
+    #rich.add_field(name="tirada", value=rollresult, inline=True)
     rich.add_field(name="total", value=totalroll, inline=True)
 
     await ctx.send(embed=rich)
@@ -117,7 +117,7 @@ async def effect(ctx, *args):
         totalroll = totalroll + rollresult[i]
     
     rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
-    'rich.add_field(name="tirada", value=rollresult, inline=True)
+    #rich.add_field(name="tirada", value=rollresult, inline=True)
     rich.add_field(name="total", value=totalroll, inline=True)
 
     await ctx.send(embed=rich)
