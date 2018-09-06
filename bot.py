@@ -72,7 +72,7 @@ async def roll(ctx, *args):
 
         totalroll = totalroll + objective
 
-    if bonus > 0:
+    if bonus > 0 or difficulty > 0:
         total = totalroll + bonus
 
         rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
