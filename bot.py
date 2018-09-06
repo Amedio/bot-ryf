@@ -2,6 +2,7 @@ import discord
 import random
 import utils
 import ryf
+import asyncio
 from discord.ext import commands
 from discord import Embed
 from checkers import to_much_dices
@@ -101,8 +102,10 @@ async def roll(ctx, *args):
 async def damage(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
-        await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
-        return
+        async with ctx.typing():
+            await asyncio.sleep(3000)
+            await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
+            return
 
     rollresult = dices(6, dice_amount)
     totalroll = 0
