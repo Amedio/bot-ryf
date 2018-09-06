@@ -15,6 +15,10 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
+@bot.command()
+async def duis(ctx):
+    await ctx.send('https://media1.tenor.com/images/270f9074cc8766817760111de4f5b71c/tenor.gif?itemid=5820863')
+
 @bot.command(description='Escribe $roll [down|d|up|u] [nivel_habilidad [dificultad]]')
 async def roll(ctx, *args):
     bonus = 0
