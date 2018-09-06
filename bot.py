@@ -77,17 +77,14 @@ async def roll(ctx, *args):
     await ctx.send(embed=rich)
 
 @bot.command()
-async def effect(ctx, arg1, *arg2):
-    bonus = 0
+async def effect(ctx, arg1, arg2=0):
+    bonus = arg2
     dice_amount = int(arg1)
     if dice_amount >= 100:
         async with ctx.typing():
             await asyncio.sleep(3)
             await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
             return
-    
-    if utils.is_int(arg2):
-        bonus = arg2
 
     roll_result = ryf.effect_roll(dice_amount)
     
