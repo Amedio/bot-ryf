@@ -77,14 +77,7 @@ async def roll(ctx, *args):
     await ctx.send(embed=rich)
 
 @bot.command()
-async def damage(ctx, *args):
-    damage_effect_command(ctx, args)
-
-@bot.command()
 async def effect(ctx, *args):
-    damage_effect_command(ctx, args)
-
-def damage_effect_command(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
         async with ctx.typing():
@@ -92,7 +85,7 @@ def damage_effect_command(ctx, *args):
             await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
             return
 
-    roll_result = ryf.damage_effect_roll(dice_amount)
+    roll_result = ryf.effect_roll(dice_amount)
     
     all_rolls = roll_result[0]
     total_roll = roll_result[1]

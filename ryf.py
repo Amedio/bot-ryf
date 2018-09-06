@@ -36,13 +36,21 @@ def attr_skill_roll(dice_index):
 
     return result
 
-def damage_effect_roll(dice_amount):
+def effect_roll(dice_amount):
     result = []
     
     roll_result = dices(6, dice_amount)
+
+    exploding_dices = roll_result.count(6)
+
+    while exploding_dices > 0:
+        exploding_roll_result = dices(6, exploding_dices)
+        roll_result.extend(exploding_roll_result)
+        exploding_dices = exploding_roll_result.count(6)
+
     total_roll = 0
-    for i in range(dice_amount):
-        total_roll = total_roll + roll_result[i]
+    for roll_value in roll_result:
+        total_roll = total_roll + roll_value
     
     result.append(roll_result)
     result.append(total_roll)
