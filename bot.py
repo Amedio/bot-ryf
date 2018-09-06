@@ -98,11 +98,12 @@ async def roll(ctx, *args):
         await ctx.send(embed=rich)
 
 @bot.command()
-@to_much_dices()
 async def damage(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
-        dice_amount = 100
+        await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
+        return
+
     rollresult = dices(6, dice_amount)
     totalroll = 0
     for i in range(dice_amount):
@@ -113,10 +114,6 @@ async def damage(ctx, *args):
     rich.add_field(name="total", value=totalroll, inline=True)
 
     await ctx.send(embed=rich)
-
-@damage.error
-async def damage_error(ctx, error):
-    await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
 
 @bot.command()
 async def effect(ctx, *args):
