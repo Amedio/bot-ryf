@@ -98,26 +98,32 @@ async def roll(ctx, *args):
 
 @bot.command()
 async def damage(ctx, *args):
-    rollresult = dices(6, int(args[0]))
+    dice_amount = int(args[0])
+    if dice_amount >= 100:
+        dice_amount = 100
+    rollresult = dices(6, dice_amount)
     totalroll = 0
-    for i in range(int(args[0])):
+    for i in range(dice_amount):
         totalroll = totalroll + rollresult[i]
     
     rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
-    #rich.add_field(name="tirada", value=rollresult, inline=True)
+    rich.add_field(name="tirada", value=rollresult, inline=True)
     rich.add_field(name="total", value=totalroll, inline=True)
 
     await ctx.send(embed=rich)
 
 @bot.command()
 async def effect(ctx, *args):
-    rollresult = dices(6, int(args[0]))
+    dice_amount = int(args[0])
+    if dice_amount >= 100:
+        dice_amount = 100
+    rollresult = dices(6, dice_amount)
     totalroll = 0
-    for i in range(int(args[0])):
+    for i in range(dice_amount):
         totalroll = totalroll + rollresult[i]
     
     rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
-    #rich.add_field(name="tirada", value=rollresult, inline=True)
+    rich.add_field(name="tirada", value=rollresult, inline=True)
     rich.add_field(name="total", value=totalroll, inline=True)
 
     await ctx.send(embed=rich)
