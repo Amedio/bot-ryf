@@ -80,9 +80,13 @@ async def roll(ctx, *args):
         rich.add_field(name="dado objetivo", value=totalroll, inline=True)
         rich.add_field(name="resultado", value="{0} + {1} = {2}".format(totalroll, bonus, total), inline=False)
 
-        if len(args) > 1:
+        if difficulty > 0:
+            if total >= difficulty:
+                rich.add_field(name='', value='ÉXITO', inline=True)
+            else:
+                rich.add_field(name='', value='FALLO', inline=True)
             if total - difficulty >= 10:
-                rich.add_field(name="CRÍTICO", value="Ha sido crítico", inline=True)
+                rich.add_field(name='', value="CRÍTICO", inline=True)
 
         await ctx.send(embed=rich)
     else:
