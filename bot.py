@@ -122,7 +122,10 @@ async def damage(ctx, *args):
 async def effect(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
-        dice_amount = 100
+        async with ctx.typing():
+            await asyncio.sleep(3)
+            await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
+            return
     rollresult = dices(6, dice_amount)
     totalroll = 0
     for i in range(dice_amount):
