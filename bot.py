@@ -3,7 +3,7 @@ import random
 from discord.ext import commands
 from discord import Embed
 
-bot = commands.Bot(command_prefix='$', description='Si quieres poder hacer una tirada escribe *$roll nivel_habilidad*')
+bot = commands.Bot(command_prefix='$')
 
 @bot.event
 async def on_ready():
@@ -12,7 +12,7 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-@bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad]')
+@bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad dificultad]')
 async def roll(ctx, *args):
 
     allrolls = []
