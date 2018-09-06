@@ -77,22 +77,30 @@ async def roll(ctx, *args):
     await ctx.send(embed=rich)
 
 @bot.command()
-async def effect(ctx, *args):
-    dice_amount = int(args[0])
+async def effect(ctx, arg1, *arg2):
+    bonus = 0
+    dice_amount = int(arg1)
     if dice_amount >= 100:
         async with ctx.typing():
             await asyncio.sleep(3)
             await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
             return
+    
+    if utils.is_int(arg2):
+        bonus = arg2
 
     roll_result = ryf.effect_roll(dice_amount)
     
     all_rolls = roll_result[0]
     total_roll = roll_result[1]
 
-    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total_roll))
+    total = total_roll + bonus
+
+    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
     rich.add_field(name="tirada", value=all_rolls, inline=True)
     rich.add_field(name="total", value=total_roll, inline=True)
+    if bonus > 0:
+        rich.add_field(name="total", value="{0} + {1} = {2}".format(total_roll, bonus, total), inline=False)
 
     await ctx.send(embed=rich)
 
