@@ -1,5 +1,7 @@
 import discord
 import random
+import utils
+import ryf
 from discord.ext import commands
 from discord import Embed
 
@@ -14,19 +16,49 @@ async def on_ready():
 
 @bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad [dificultad]]')
 async def roll(ctx, *args):
+    bonus = 0
+    difficulty = 0
+    dice_index = 1
+
+    if len(args) == 1 and utils.is_int(args[0]):
+        bonus = int(args[0])
+    elif len(args) == 2 and utils.is_int(args[0]) and utils.is_int(args[1]):
+        bonus = int(args[0])
+        difficulty = int(args[1])
+    elif len(args) == 3 and utils.is_int(args[1]) and utils.is_int(args[2]):
+        bonus = int(args[1])
+        difficulty = int(args[2])
+    elif len(args) == 2 and utils.is_int(args[1]):
+        bonus = int(args[1])
+
+    dice_index = 1
+    if len(args) > 0 and not utils.is_int(args[0]):
+        if args[0] == 'down' or args[0] == 'd':
+            dice_index = 0
+        elif args[0] == 'up' or args[0] == 'u':
+            dice_index = 2
+    
     allrolls = []
     rollresult = dices()
     allrolls.append(rollresult)
 
-    objective = sorted(rollresult)[1]
+    objective = sorted(rollresult)[dice_index]
 
     if objective == 1:
-        next = sorted(rollresult)[2]
-        if next <= 5:
+        if dice_index < 2:
+            next = sorted(rollresult)[dice_index + 1]
+            if next <= 5:
+                rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **PIFIA**".format(ctx))
+                rich.add_field(name="tirada", value=allrolls, inline=False)
+                rich.add_field(name="dado objetivo", value=objective, inline=True)
+                rich.add_field(name="dado siguiente", value=next, inline=True)
+
+                await ctx.send(embed=rich)
+                return
+        else:
             rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **PIFIA**".format(ctx))
             rich.add_field(name="tirada", value=allrolls, inline=False)
             rich.add_field(name="dado objetivo", value=objective, inline=True)
-            rich.add_field(name="dado siguiente", value=next, inline=True)
 
             await ctx.send(embed=rich)
             return
@@ -36,21 +68,19 @@ async def roll(ctx, *args):
     while objective == 10:
         rollresult = dices()
         allrolls.append(rollresult)
-        objective = sorted(rollresult)[1]
+        objective = sorted(rollresult)[dice_index]
 
         totalroll = totalroll + objective
 
     if len(args) > 0:
-        skill = int(args[0])
-        total = totalroll + skill
+        total = totalroll + bonus
 
         rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
         rich.add_field(name="tirada", value=allrolls, inline=True)
         rich.add_field(name="dado objetivo", value=totalroll, inline=True)
-        rich.add_field(name="resultado", value="{0} + {1} = {2}".format(totalroll, skill, total), inline=False)
+        rich.add_field(name="resultado", value="{0} + {1} = {2}".format(totalroll, bonus, total), inline=False)
 
         if len(args) > 1:
-            difficulty = int(args[1])
             if total - difficulty >= 10:
                 rich.add_field(name="CRÍTICO", value="Ha sido crítico", inline=True)
 
