@@ -76,7 +76,7 @@ async def roll(ctx, *args):
 
     await ctx.send(embed=rich)
 
-@bot.command()
+@bot.command(description='Escribe $effect numero_dados [bonus]')
 async def effect(ctx, arg1, arg2=0):
     bonus = arg2
     dice_amount = int(arg1)
