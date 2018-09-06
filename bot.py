@@ -15,7 +15,7 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-@bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad [dificultad]]')
+@bot.command(description='Escribe $roll [down|d|up|u] [nivel_habilidad [dificultad]]')
 async def roll(ctx, *args):
     bonus = 0
     difficulty = 0
@@ -39,7 +39,7 @@ async def roll(ctx, *args):
         elif args[0] == 'up' or args[0] == 'u':
             dice_index = 2
     
-    roll_result = ryf.roll(dice_index)
+    roll_result = ryf.attr_skill_roll(dice_index)
 
     all_rolls = roll_result[0]
     total_roll = roll_result[1]
@@ -78,52 +78,29 @@ async def roll(ctx, *args):
 
 @bot.command()
 async def damage(ctx, *args):
-    dice_amount = int(args[0])
-    if dice_amount >= 100:
-        async with ctx.typing():
-            await asyncio.sleep(3)
-            await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
-            return
-
-    rollresult = dices(6, dice_amount)
-    totalroll = 0
-    for i in range(dice_amount):
-        totalroll = totalroll + rollresult[i]
-    
-    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
-    rich.add_field(name="tirada", value=rollresult, inline=True)
-    rich.add_field(name="total", value=totalroll, inline=True)
-
-    await ctx.send(embed=rich)
+    damage_effect_command(ctx, args)
 
 @bot.command()
 async def effect(ctx, *args):
+    damage_effect_command(ctx, args)
+
+def damage_effect_command(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
         async with ctx.typing():
             await asyncio.sleep(3)
             await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
             return
-    rollresult = dices(6, dice_amount)
-    totalroll = 0
-    for i in range(dice_amount):
-        totalroll = totalroll + rollresult[i]
+
+    roll_result = ryf.damage_effect_roll(dice_amount)
     
-    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
-    rich.add_field(name="tirada", value=rollresult, inline=True)
-    rich.add_field(name="total", value=totalroll, inline=True)
+    all_rolls = roll_result[0]
+    total_roll = roll_result[1]
+
+    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total_roll))
+    rich.add_field(name="tirada", value=all_rolls, inline=True)
+    rich.add_field(name="total", value=total_roll, inline=True)
 
     await ctx.send(embed=rich)
-
-def dices(dicevalue=10,amount=3):
-    min = 1
-    max = dicevalue
-
-    result = []
-
-    for _ in range(amount):
-        result.append(random.randint(min, max))
-
-    return result
 
 bot.run('NDg2NTE2OTU1MDgwMDMyMjU3.DnAVeQ.D3i-Xgr715KvME3knB94KF-0Rv8')
