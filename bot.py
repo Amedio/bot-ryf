@@ -103,7 +103,7 @@ async def damage(ctx, *args):
     dice_amount = int(args[0])
     if dice_amount >= 100:
         async with ctx.typing():
-            await asyncio.sleep(3000)
+            await asyncio.sleep(3)
             await ctx.send("https://media.giphy.com/media/9JjnmOwXxOmLC/giphy.gif")
             return
 
