@@ -86,7 +86,7 @@ async def roll(ctx, *args):
             else:
                 rich.add_field(name="resultado", value="FALLO", inline=True)
             if total - difficulty >= 10:
-                rich.add_field(name="crítico", value="CRÍTICO", inline=False)
+                rich.add_field(name="crítico", value="CRÍTICO", inline=True)
 
         await ctx.send(embed=rich)
     else:
