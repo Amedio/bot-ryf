@@ -78,15 +78,15 @@ async def roll(ctx, *args):
         rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
         rich.add_field(name="tirada", value=allrolls, inline=True)
         rich.add_field(name="dado objetivo", value=totalroll, inline=True)
-        rich.add_field(name="resultado", value="{0} + {1} = {2}".format(totalroll, bonus, total), inline=False)
+        rich.add_field(name="total", value="{0} + {1} = {2}".format(totalroll, bonus, total), inline=False)
 
         if difficulty > 0:
             if total >= difficulty:
-                rich.add_field(name='', value='ÉXITO', inline=True)
+                rich.add_field(name="resultado", value="ÉXITO", inline=True)
             else:
-                rich.add_field(name='', value='FALLO', inline=True)
+                rich.add_field(name="resultado", value="FALLO", inline=True)
             if total - difficulty >= 10:
-                rich.add_field(name='crit', value="CRÍTICO", inline=False)
+                rich.add_field(name="crítico", value="CRÍTICO", inline=False)
 
         await ctx.send(embed=rich)
     else:
