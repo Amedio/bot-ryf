@@ -14,7 +14,6 @@ async def on_ready():
 
 @bot.command(description='Para hacer una tirada prueba $roll [nivel_habilidad [dificultad]]')
 async def roll(ctx, *args):
-
     allrolls = []
     rollresult = dices()
     allrolls.append(rollresult)
@@ -63,16 +62,32 @@ async def roll(ctx, *args):
 
         await ctx.send(embed=rich)
 
-def dices():
+@bot.command()
+async def damage(ctx, *args):
+    await effect(ctx, args)
+
+@bot.command()
+async def effect(ctx, *args):
+    rollresult = dices(6, int(args[0]))
+    totalroll = 0
+    for i in range(int(args[0])):
+        totalroll = totalroll + rollresult[i]
+    
+    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, totalroll))
+    rich.add_field(name="tirada", value=rollresult, inline=True)
+    rich.add_field(name="total", value=totalroll, inline=True)
+
+    await ctx.send(embed=rich)
+
+def dices(dicevalue=10,amount=3):
     min = 1
-    max = 10
+    max = dicevalue
 
     result = []
 
-    for _ in range(3):
+    for _ in range(amount):
         result.append(random.randint(min, max))
 
     return result
-
 
 bot.run('NDg2NTE2OTU1MDgwMDMyMjU3.DnAVeQ.D3i-Xgr715KvME3knB94KF-0Rv8')
