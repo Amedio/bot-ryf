@@ -3,10 +3,16 @@ import random
 import utils
 import ryf
 import asyncio
+import configparser
 from discord.ext import commands
 from discord import Embed
 
 bot = commands.Bot(command_prefix='$')
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+bot-token = config['DEFAULT']['BOT-TOKEN']
 
 @bot.event
 async def on_ready():
@@ -105,4 +111,4 @@ async def effect(ctx, arg1, arg2=0):
 
     await ctx.send(embed=rich)
 
-bot.run('NDg2NTE2OTU1MDg0Rv8')
+bot.run(bot-token)
