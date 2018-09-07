@@ -8,7 +8,7 @@ import os
 from discord.ext import commands
 from discord import Embed
 
-bot_token = os.environ['BOT-TOKEN']
+bot_token = os.environ['BOT_TOKEN']
 
 bot = commands.Bot(command_prefix='$')
 
