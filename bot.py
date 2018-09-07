@@ -7,7 +7,7 @@ import configparser
 from discord.ext import commands
 from discord import Embed
 
-bot-token = os.environ['BOT-TOKEN']
+bot_token = os.environ['BOT-TOKEN']
 
 bot = commands.Bot(command_prefix='$')
 
