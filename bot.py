@@ -7,12 +7,9 @@ import configparser
 from discord.ext import commands
 from discord import Embed
 
+bot-token = os.environ['BOT-TOKEN']
+
 bot = commands.Bot(command_prefix='$')
-
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-bot-token = config['DEFAULT']['BOT-TOKEN']
 
 @bot.event
 async def on_ready():
