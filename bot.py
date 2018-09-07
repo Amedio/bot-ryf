@@ -109,4 +109,4 @@ async def effect(ctx, arg1, arg2=0):
 
     await ctx.send(embed=rich)
 
-bot.run(bot-token)
+bot.run(bot_token)
