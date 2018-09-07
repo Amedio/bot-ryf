@@ -4,6 +4,7 @@ import utils
 import ryf
 import asyncio
 import configparser
+import os
 from discord.ext import commands
 from discord import Embed
 
