@@ -67,7 +67,7 @@ async def roll(ctx, *args):
 
     total = total_roll + bonus
 
-    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
+    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total), color=0xffffff)
     rich.add_field(name="tirada", value=all_rolls, inline=True)
     rich.add_field(name="dado objetivo", value=total_roll, inline=True)
     
@@ -101,7 +101,7 @@ async def effect(ctx, arg1, arg2=0):
 
     total = total_roll + bonus
 
-    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total))
+    rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **{1}**".format(ctx, total), color=0xffffff)
     rich.add_field(name="tirada", value=all_rolls, inline=True)
     rich.add_field(name="total", value=total_roll, inline=True)
     if bonus > 0:
