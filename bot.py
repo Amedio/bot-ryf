@@ -56,7 +56,7 @@ async def roll(ctx, *args):
         critical_failure_next = roll_result[2]
 
     if total_roll == 1:
-        rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **PIFIA**".format(ctx))
+        rich=Embed(title="El resultado de la tirada de {0.author.display_name} es **PIFIA**".format(ctx), color=0xffffff)
         rich.add_field(name="tirada", value=all_rolls, inline=False)
         rich.add_field(name="dado objetivo", value=total_roll, inline=True)
         if critical_failure_next > 0:
